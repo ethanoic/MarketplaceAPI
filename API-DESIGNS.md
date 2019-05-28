@@ -192,7 +192,22 @@ Else there will not be a link in actions list to make an offer
         {
             "message": "Offer successfully removed"
         }
+        
+## Cancel an offer to a product with optional parameters [/v1.1/products/{id}/offers/{offerId}{?vote}]
 
+### Buyer removes the offer and submit a vote value from 1 to 5 [DELETE]
+
++ Parameters
+
+    + id: 1 (number) - id of product
+    + offerId: 9001 (number) - id of offer to cancel
+    + vote: 3 (number) - vote value provided by potential buyer
+    
++ Response 200 (application/json) 
+
+        {
+            "message": "Offer successfully removed"
+        }
 
 ## Add Product [/products]
 
