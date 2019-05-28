@@ -290,10 +290,6 @@ data based on the type of user (Seller or Buyer)
         
 + Response 200 (application/json)
 
-        {
-            "id": 80010
-        }
-
 # Group One Time Password
 
 ## One Time Password Verification [/one-time-password/{code}]

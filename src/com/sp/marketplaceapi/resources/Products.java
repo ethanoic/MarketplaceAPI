@@ -13,11 +13,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import com.sp.marketplaceapi.models.Action;
 import com.sp.marketplaceapi.models.Product;
+import com.sp.marketplaceapi.models.ProductDetailsModel;
 import com.sp.marketplaceapi.models.ProductsPagedResult;
 
 @Path("products")
 public class Products {
+	
+	private ActionsGenerator actionsGenerator = new ActionsGenerator();
 	
 	// GET /products?category=xxxxx
 	@GET
@@ -57,6 +61,11 @@ public class Products {
 		// TODO
 		// Search database return 1 product object
 		Product getProduct = new Product();
+		
+		// create instance of product details model
+		ProductDetailsModel detailModel = new ProductDetailsModel();
+		detailModel.Actions = actionsGenerator.CreateProductDetailActions(getProduct);
+		
 		return Response.ok(getProduct).build();
 	}
 	
