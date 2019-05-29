@@ -25,7 +25,7 @@ public class AccountsManager {
 	    Mail mail = new Mail(from, subject, to, content);
 
 	    //SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
-	    SendGrid sg = new SendGrid("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");
+	    SendGrid sg = new SendGrid("<insert your sendgrid api key>");
 	    Request request = new Request();
 	    try {
 	      request.setMethod(Method.POST);
