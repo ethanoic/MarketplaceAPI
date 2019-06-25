@@ -3,6 +3,7 @@ package com.sp.marketplaceapi.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.Produces;
@@ -23,6 +24,7 @@ public class Products {
 	
 	private ActionsGenerator actionsGenerator = new ActionsGenerator();
 	
+	@RolesAllowed("Member")
 	// GET /products?category=xxxxx
 	@GET
 	@Produces("application/json")
@@ -54,6 +56,7 @@ public class Products {
 	}
 	
 	// GET /products/{id}
+	@RolesAllowed("Member")
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
@@ -69,12 +72,14 @@ public class Products {
 		return Response.ok(getProduct).build();
 	}
 	
+	@RolesAllowed("Member")
 	@Path("{id}/offers")
 	public Offers OffersSubResource(@PathParam("id") int id) {
 		return new Offers(id);
 	}
 	
 	// POST /products
+	@RolesAllowed("Member")
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
