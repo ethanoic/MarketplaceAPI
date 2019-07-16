@@ -18,6 +18,7 @@ import com.sp.marketplaceapi.models.Action;
 import com.sp.marketplaceapi.models.Product;
 import com.sp.marketplaceapi.models.ProductDetailsModel;
 import com.sp.marketplaceapi.models.ProductsPagedResult;
+import com.sp.marketplaceapi.managers.ProductsManager;
 
 @Path("products")
 public class Products {
@@ -28,19 +29,25 @@ public class Products {
 	// GET /products?category=xxxxx
 	@GET
 	@Produces("application/json")
-	public Response GetAllProducts(@QueryParam("category") String category,
+	public Response GetAllProducts(@QueryParam("category") int categoryId,
 			@QueryParam("pageSize") @DefaultValue("20") int pageSize,
 			@QueryParam("pageIndex") @DefaultValue("0") int pageIndex) {
 		// TODO
 		// Search database return list
 		// Provide pagination controls (future)
 		
-		ProductsPagedResult result = new ProductsPagedResult();
-		result.List = new ArrayList();
-		result.Next = "";
-		result.Prev = "";
-		result.TotalCount = 0;
+		ProductsManager productManager = new ProductsManager();
 		
+		ProductsPagedResult result = new ProductsPagedResult();
+		
+		int totalProductCount = productManager.CountProducts(categoryId);
+		
+		result.List = productManager.FindAllProducts(pageIndex, pageSize, categoryId);
+		result.Next = (((pageIndex + 1) * pageSize) >= totalProductCount) ? "" : "/products/?pageSize=" + pageSize + "&pageIndex=" + (pageIndex + 1);
+		result.Prev = pageIndex > 0 ? "/products/?pageSize=" + pageSize + "&pageIndex=" + (pageIndex - 1) : "";
+		result.TotalCount = totalProductCount;
+		
+		/*
 		Product[] productArray = new Product[2];
 		productArray[0] = new Product();
 		productArray[0].Name = "Macbook";
@@ -51,6 +58,7 @@ public class Products {
 		List<Product> productList = new ArrayList<Product>();
 		productList.add(productArray[0]);
 		productList.add(productArray[1]);
+		*/
 		
 		return Response.ok(result).build();
 	}
@@ -86,9 +94,14 @@ public class Products {
 	public Response AddProduct(Product newProduct) {
 		// TODO
 		// Validate data
+		
 		// Insert into database
+		ProductsManager productManager = new ProductsManager();
+		
+		int id = productManager.CreateProduct(newProduct);
+		
 		// return the id of the product
-		return Response.ok(newProduct).build();
+		return Response.ok(id).build();
 	}
 	
 	

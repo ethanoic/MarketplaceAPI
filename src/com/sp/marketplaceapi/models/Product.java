@@ -11,4 +11,5 @@ public class Product {
 	public String ShortDescription;
 	public String HeroImage;
 	public int Likes;
+	public int CategoryId;
 }

@@ -16,12 +16,12 @@ public class ConnectionManager {
 		Connection conn = null;
 		
 		AppPropertyValues configValues = new AppPropertyValues();
-		Dictionary config = new HashTable();
+		Dictionary config = new Hashtable();
 		
 		try {
 			config = configValues.getPropValues();
 		} catch (Exception ex) {
-			
+			System.out.println(ex.getMessage());
 		}
 		
 		// config must not be empty
@@ -35,7 +35,7 @@ public class ConnectionManager {
 			try {
 			    conn =
 			       DriverManager.getConnection("jdbc:mysql://" + dbHostname + "/" + dbSchema + "?" +
-			                                   "user=" + dbUser + "&password=" + dbPassword);
+			                                   "user=" + dbUser + "&password=" + dbPassword + "&useSSL=false");
 
 			    // Do something with the Connection
 
