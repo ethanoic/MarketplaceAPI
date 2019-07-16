@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "b0c1a233-75a3-43ed-8bf7-5ce5fe752ffb",
+		"name": "Marketplace API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Username\": \"user\",\n\t\"Password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/accounts/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"accounts",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products by category with pagination",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjMyODI4NDUsInN1YiI6InVzZXIiLCJyb2xlIjoibWVtYmVyIiwibmFtZSI6ImhhcnJ5IiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjMyODMxNDV9.zwibF9D7KVkm0OYiB3LJ234VY4oS4rEof1Mhh5l3AZ8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products?pageSize=10&pageIndex=0&category=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "pageIndex",
+							"value": "0"
+						},
+						{
+							"key": "category",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product to listing",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjMyODI4NDUsInN1YiI6InVzZXIiLCJyb2xlIjoibWVtYmVyIiwibmFtZSI6ImhhcnJ5IiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjMyODMxNDV9.zwibF9D7KVkm0OYiB3LJ234VY4oS4rEof1Mhh5l3AZ8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CategoryId\": 2,\n\t\"DealTypes\": [\"Meetup\"],\n\t\"FullDescription\": \"Another shirt\",\n\t\"Name\": \"HALF Life gamer shirt\",\n\t\"Price\": 12.99,\n\t\"ShortDescription\": \"Half Life\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
