@@ -30,7 +30,13 @@ public class ConnectionManager {
 			String dbSchema = config.get("dbSchema").toString();
 			String dbUser = config.get("dbUser").toString();
 			String dbPassword = config.get("dbPassword").toString();
-			
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 			
 			try {
 			    conn =
