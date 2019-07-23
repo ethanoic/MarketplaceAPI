@@ -31,6 +31,7 @@ public class JWTToken {
 	                                .setSubject(subject)
 	                                .claim("role", role)
 	                                .claim("name", name)
+	                                .claim("payload", payload)
 	                                .setIssuer(issuer)
 	                                .signWith(signatureAlgorithm, signingKey);
 	 
@@ -68,6 +69,12 @@ public class JWTToken {
 	    System.out.println("Expiration: " + claims.getExpiration());
 	    */
 		return result;
+	}
+	
+	public static Claims getClaims(String jwt) {
+		return Jwts.parser()         
+			       .setSigningKey(DatatypeConverter.parseBase64Binary(apiKey.getSecret()))
+			       .parseClaimsJws(jwt).getBody();
 	}
 
 }

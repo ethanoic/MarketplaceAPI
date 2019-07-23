@@ -6,30 +6,64 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 import com.sp.marketplaceapi.database.ConnectionManager;
 import com.sp.marketplaceapi.models.Product;
 
 public class ProductsManager {
 	
+	public Product GetProduct(int id) {
+		Product findProduct = null;
+		
+		try {
+			Connection conn = ConnectionManager.Get();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM products WHERE id = ?");
+			statement.setInt(1, id);
+			
+			ResultSet result = statement.executeQuery();
+			
+			ArrayList products = this.ResultSetToProductList(result);
+			if (products.size() == 1)
+				findProduct = (Product) products.get(0);
+			
+		} catch(Exception ex) {
+		}
+		
+		return findProduct;
+	}
+	
+	public boolean RemoveProduct(int id) {
+		boolean result = true;
+		try {
+			Connection conn = ConnectionManager.Get();
+			PreparedStatement statement = conn.prepareStatement("DELETE FROM products WHERE id = ?");
+			statement.setInt(1, id);
+			
+			statement.execute();
+		} catch(Exception ex) {
+			result = false;
+		}
+		return result;
+	}
+	
 	private ArrayList ResultSetToProductList(ResultSet result) throws Exception{
 		ArrayList list = new ArrayList();
 		try {
-		while (result.next()) {
-			Product product = new Product();
-			product.Id = result.getInt("id");
-			product.Name = result.getString("name");
-			product.Price = result.getDouble("price");
-			product.Images = result.getString("images").split(",");
-			product.FullDescription = result.getString("full_description");
-			product.DealTypes = result.getString("deal_types").split(",");
-			product.ShortDescription = result.getString("short_description");
-			product.HeroImage = result.getString("hero_image");
-			product.Likes = result.getInt("likes");
-			product.CategoryId = result.getInt("category_id");
-			
-			list.add(product);
-		}
+			while (result.next()) {
+				Product product = new Product();
+				product.Id = result.getInt("id");
+				product.Name = result.getString("name");
+				product.Price = result.getDouble("price");
+				product.Images = result.getString("images").split(",");
+				product.FullDescription = result.getString("full_description");
+				product.DealTypes = result.getString("deal_types").split(",");
+				product.ShortDescription = result.getString("short_description");
+				product.HeroImage = result.getString("hero_image");
+				product.Likes = result.getInt("likes");
+				product.CategoryId = result.getInt("category_id");
+				product.OwnedByUser = result.getInt("owned_by_user");
+				
+				list.add(product);
+			}
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -126,7 +160,10 @@ public class ProductsManager {
 		
 		try {
 			Connection conn = ConnectionManager.Get();
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO products (name, price, full_description, deal_types, short_description, category_id, images, hero_image, likes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO products "
+					+ "(name, price, full_description, deal_types, short_description, "
+					+ "category_id, images, hero_image, likes, owned_by_user) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
 					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, newProduct.Name);
 			statement.setDouble(2, newProduct.Price);
@@ -137,6 +174,7 @@ public class ProductsManager {
 			statement.setString(7, "");
 			statement.setString(8, "");
 			statement.setInt(9, 0);
+			statement.setInt(10, newProduct.OwnedByUser);
 			
 			statement.execute();
 			
@@ -151,4 +189,51 @@ public class ProductsManager {
 		
 		return id;
 	}
+	
+	public boolean UpdateProduct(int id, Product updatedProduct) {
+		boolean result = true;
+		try {
+			Connection conn = ConnectionManager.Get();
+			PreparedStatement statement = conn.prepareStatement("UPDATE products SET name = ?, "
+					+ "	price = ?, full_description = ?, deal_types = ?, short_description = ?, "
+					+ "category_id = ?, images = ?, hero_image = ?, likes = ? "
+					+ "WHERE id = ?");
+			statement.setString(1, updatedProduct.Name);
+			statement.setDouble(2, updatedProduct.Price);
+			statement.setString(3, updatedProduct.FullDescription);
+			statement.setString(4, String.join(",", updatedProduct.DealTypes));
+			statement.setString(5, updatedProduct.ShortDescription);
+			statement.setInt(6, updatedProduct.CategoryId);
+			statement.setString(7, String.join(",", updatedProduct.Images));
+			statement.setString(8, updatedProduct.HeroImage);
+			statement.setInt(9, updatedProduct.Likes);
+			statement.setInt(10, id);
+			
+			statement.execute();
+			
+		} catch (Exception ex) {
+			result = false;
+			// log the exception into a logging facility or db or log file
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
