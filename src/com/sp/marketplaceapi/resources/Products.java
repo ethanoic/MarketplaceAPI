@@ -83,10 +83,8 @@ public class Products {
 		
 		// get current jwt and extract payload - role user id
 		String authToken = httpHeaders.getHeaderString("Authorization");
-		authToken = authToken.replace("Bearer ", "");
-		Claims claims = JWTToken.getClaims(authToken);
-		String payload = claims.get("payload").toString();
-		int userId = Integer.parseInt(payload);
+		int userId = Utility.GetUserIdFromAuthToken(authToken);
+		
 		if (getProduct != null) {
 			detailModel = new ProductDetailsModel(getProduct);
 			detailModel.Actions = actionsGenerator.CreateProductDetailActions(getProduct, userId);

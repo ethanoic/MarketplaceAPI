@@ -56,7 +56,7 @@ public class Accounts {
 			String userId = getUser.Id + "";
 			String roleName = getUser.Role;
 			String accessToken = JWTToken.createJWT(jwtIssuer.getId(), jwtIssuer.getIssuer(), "user", 
-					userId, roleName, "", 300000);
+					userId, roleName, "", 3000000);
 			return Response.ok(accessToken).build();	
 		} else {
 			return Response.status(Status.UNAUTHORIZED).build();

@@ -1,6 +1,9 @@
 package com.sp.marketplaceapi.models;
 
-public class CreateOffer {
+import java.sql.Timestamp;
+
+public class OfferModel {
 	public double Price;
 	public String MeetupLocation;
+	public Timestamp OfferTimeStamp;
 }
