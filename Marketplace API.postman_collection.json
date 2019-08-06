@@ -9,10 +9,17 @@
 			"name": "Auth",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Username\": \"user\",\n\t\"Password\": \"password\"\n}"
+					"raw": "{\n\t\"Username\": \"jamchoi\",\n\t\"Password\": \"password1\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/MarketplaceAPI/accounts/auth",
@@ -38,7 +45,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjMyODI4NDUsInN1YiI6InVzZXIiLCJyb2xlIjoibWVtYmVyIiwibmFtZSI6ImhhcnJ5IiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjMyODMxNDV9.zwibF9D7KVkm0OYiB3LJ234VY4oS4rEof1Mhh5l3AZ8",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjM4OTA2MjQsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIyIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjM4OTA5MjR9.FoZIESZW7Ytfl0nW8EJ3tndDPxiKHWPuoWYs0h3PN6A",
 							"type": "string"
 						}
 					]
@@ -46,7 +53,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/MarketplaceAPI/products?pageSize=10&pageIndex=0&category=2",
+					"raw": "http://localhost:8080/MarketplaceAPI/products?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -59,15 +66,13 @@
 					"query": [
 						{
 							"key": "pageSize",
-							"value": "10"
+							"value": "10",
+							"disabled": true
 						},
 						{
 							"key": "pageIndex",
-							"value": "0"
-						},
-						{
-							"key": "category",
-							"value": "2"
+							"value": "0",
+							"disabled": true
 						}
 					]
 				}
@@ -82,7 +87,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjMyODI4NDUsInN1YiI6InVzZXIiLCJyb2xlIjoibWVtYmVyIiwibmFtZSI6ImhhcnJ5IiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjMyODMxNDV9.zwibF9D7KVkm0OYiB3LJ234VY4oS4rEof1Mhh5l3AZ8",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjMyODQzNzEsInN1YiI6InVzZXIiLCJyb2xlIjoibWVtYmVyIiwibmFtZSI6ImhhcnJ5IiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjMyODQ2NzF9.zk0G2Y1iVTD7nF3wI6of1h5UYafgVDUMudpsKwpA1NE",
 							"type": "string"
 						}
 					]
@@ -196,7 +201,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjM4ODY5MDksInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIyIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjM4ODcyMDl9.7BHVZvn_c2VKSisgqGUuDjWixx-e-ArZDi4zQvO0oyo",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjUwOTY2MjcsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIzIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjUwOTk2Mjd9.V4clIKp1B6fGAPXXyNZmITWWEPTfSy9shi_te1WqP9E",
 							"type": "string"
 						}
 					]
@@ -233,7 +238,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"FirstName\": \"Jam\",\n\t\"LastName\": \"Choi\",\n\t\"Email\": \"jam.choi@marketing.com\",\n\t\"Username\": \"jamchoi\",\n\t\"Password\": \"password1\",\n\t\"CountryCode\": \"65\",\n\t\"Mobile\": \"8776655\"\n}"
+					"raw": "{\n\t\"FirstName\": \"YOLO\",\n\t\"LastName\": \"Tan\",\n\t\"Email\": \"yolo.tan@marketing.com\",\n\t\"Username\": \"yolo\",\n\t\"Password\": \"only1\",\n\t\"CountryCode\": \"65\",\n\t\"Mobile\": \"999988776\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/MarketplaceAPI/accounts",
@@ -245,6 +250,157 @@
 					"path": [
 						"MarketplaceAPI",
 						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Offers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjQ0ODgxMjMsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIyIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjQ0OTExMjN9.qFVz4CVPy9S7m7jJi98Giq5gQsuOqFybnPUZ7YFw9hY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products/3/offers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products",
+						"3",
+						"offers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Offer to product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjQ0ODgyMjMsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIzIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjQ0OTEyMjN9.Du4eUUvTBY7oR6ot5itAqVeF05UHGwwPNlWBkLnZffU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Price\": 10,\n\t\"MeetupLocation\": \"DOVER MRT\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products/4/offers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products",
+						"4",
+						"offers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyer / Seller post message to each other",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjUwOTcwNTUsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIyIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjUxMDAwNTV9.MfIXL0fWdi8Fy3FHIuIpCSjWED_kXD6w_NxdxisfwlI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Message\": \"CAN GIVE ME DISCOUNT???\",\n\t\"BuyerId\": 0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products/3/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products",
+						"3",
+						"chat"
+					]
+				},
+				"description": "To test this, get a JWT as a buyer to post the message\nAnd then get a JWT as a seller to reply the message to the specific buyer"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove offer to product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJ1c2VydG9rZW4iLCJpYXQiOjE1NjQ0ODQ4MzYsInN1YiI6InVzZXIiLCJyb2xlIjoiTUVNQkVSIiwibmFtZSI6IiIsInBheWxvYWQiOiIyIiwiaXNzIjoibWFya2V0cGxhY2Uuc2ciLCJleHAiOjE1NjQ0ODc4MzZ9.eRhf60DoVKztWcYfZwi-Yv61UK0Y7EBtuZuI6WVhWKk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/MarketplaceAPI/products/3/offers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"MarketplaceAPI",
+						"products",
+						"3",
+						"offers"
 					]
 				}
 			},
