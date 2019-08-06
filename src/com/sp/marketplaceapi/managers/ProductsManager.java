@@ -11,6 +11,35 @@ import com.sp.marketplaceapi.models.Product;
 
 public class ProductsManager {
 	
+	public int GetSellerId(int productId) {
+		int sellerId = 0;
+		try {
+			Connection conn = ConnectionManager.Get();
+			PreparedStatement statement = conn.prepareStatement("SELECT owned_by_user FROM products WHERE id = ?");
+			statement.setInt(1, productId);
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				sellerId = result.getInt("owned_by_user");
+			}
+		} catch(Exception ex) {
+		}
+		return sellerId;
+	}
+	
+	public Boolean isOwnedByUser(int productId, int userId) {
+		Boolean isOwned = false;
+		try {
+			Connection conn = ConnectionManager.Get();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM products WHERE id = ? AND owned_by_user = ?");
+			statement.setInt(1, productId);
+			statement.setInt(2, userId);
+			ResultSet result = statement.executeQuery();
+			isOwned = result.next();
+		} catch(Exception ex) {
+		}
+		return isOwned;
+	}
+	
 	public Product GetProduct(int id) {
 		Product findProduct = null;
 		

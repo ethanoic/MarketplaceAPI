@@ -134,4 +134,9 @@ public class Products {
 		return Response.ok().build();
 	}
 	
+	@RolesAllowed("Member")
+	@Path("{id}/chat")
+	public Chats ChatsSubResource(@PathParam("id") int id) {
+		return new Chats(id);
+	}
 }
