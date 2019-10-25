@@ -41,7 +41,7 @@ public class ConnectionManager {
 			try {
 			    conn =
 			       DriverManager.getConnection("jdbc:mysql://" + dbHostname + "/" + dbSchema + "?" +
-			                                   "user=" + dbUser + "&password=" + dbPassword + "&useSSL=false");
+			                                   "user=" + dbUser + "&password=" + dbPassword + "&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
 
 			    // Do something with the Connection
 
